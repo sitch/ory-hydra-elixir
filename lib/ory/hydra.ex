@@ -8,13 +8,13 @@ defmodule ORY.Hydra do
   [official documentation](https://www.ory.sh/docs/hydra/).
   """
 
-  alias ORY.Hydra.{ Config, Operation, Request, Response }
+  alias ORY.Hydra.{Config, Operation, Request, Response}
 
-  @type http_headers_t :: [{ String.t(), String.t() }]
+  @type http_headers_t :: [{String.t(), String.t()}]
 
-  @type http_method_t :: :delete | :get | :post | :put
+  @type http_method_t :: :delete | :get | :post | :put | :form
 
-  @type response_t :: { :ok, Response.t() } | { :error, Response.t() | any }
+  @type response_t :: {:ok, Response.t()} | {:error, Response.t() | any}
 
   @doc """
   Accept a consent request.
@@ -233,7 +233,7 @@ defmodule ORY.Hydra do
   @spec introspect(map) :: Operation.t()
   def introspect(params) do
     %Operation{
-      method: :post,
+      method: :form,
       params: params,
       path: "/oauth2/introspect"
     }
